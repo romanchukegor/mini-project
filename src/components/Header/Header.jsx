@@ -6,6 +6,7 @@ class Header extends React.Component {
     super(props);
   }
   render() {
+    const { handleChange, searchFilter, total } = this.props;
     return (
       <div className="header">
         <div>
@@ -19,12 +20,12 @@ class Header extends React.Component {
           <input
             type="text"
             placeholder="Название товара"
-            onChange={this.props.handleChange}
+            onChange={handleChange}
           />
-          <button onClick={this.props.searchFilter}>ПОИСК</button>
+          <button onClick={searchFilter}>ПОИСК</button>
         </div>
         <div className="header__text">
-          <p>Общая стоимость выбранных товаров: {this.props.total} р.</p>
+          <p>Общая стоимость выбранных товаров: {total} р.</p>
         </div>
       </div>
     );

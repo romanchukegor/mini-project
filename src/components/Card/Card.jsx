@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Buttons from "../Buttons/Buttons";
-import AddButton from "../AddButton/AddButton";
+import Buttons from "components/Buttons/Buttons";
+import AddButton from "components/AddButton/AddButton";
 import "./Card.scss";
 
 class Card extends Component {
@@ -20,25 +20,29 @@ class Card extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.count > prevState.count) {
-      this.setState({ amount: prevState.amount - 1 });
+      this.setState({ amount: this.state.amount - 1 });
     } else if (this.state.count < prevState.count) {
-      this.setState({ amount: prevState.amount + 1 });
+      this.setState({ amount: this.state.amount + 1 });
     }
     if (this.state.count > prevState.count) {
-      this.props.totalSumInc(this.state.price);
+      this.props.totalSumInc(this.state.price, this.state.count);
     } else if (this.state.count < prevState.count) {
-      this.props.totalSumDec(this.state.price);
+      this.props.totalSumDec(this.state.price, this.state.count);
     }
   }
 
   selectedProduct = () => {
     if (this.state.count === 0) {
-      this.setState({ selectedProduct: true });
-      this.setState({ count: 1 });
-    } else {
-      this.setState({ selectedProduct: false });
-      this.setState({ count: 0 });
+      this.setState({ selectedProduct: true, count: 1 });
     }
+  };
+
+  removeProduct = () => {
+    this.setState({
+      selectedProduct: false,
+      count: 0,
+      amount: this.props.item.amount,
+    });
   };
 
   increment = () => {
@@ -50,24 +54,28 @@ class Card extends Component {
   };
 
   render() {
+    const { price, amount, name, img, count } = this.state;
     return (
-      <div className="card-container">
+      <div className="card">
         <div
           className={
-            this.state.selectedProduct === false ? "card" : "card-active"
+            this.state.selectedProduct === false
+              ? "card__inactive"
+              : "card__active"
           }
         >
-          <img src={this.state.img} alt="" />
-          <div style={{ fontWeight: "bold" }}>{this.state.name}</div>
-          <div>Цена: {this.state.price}</div>
-          <div>Всего: {this.state.amount}</div>
+          <img src={img} alt="" />
+          <div style={{ fontWeight: "bold" }}>{name}</div>
+          <div>Цена: {price}</div>
+          <div>Всего: {amount}</div>
         </div>
-        {this.state.count !== 0 ? (
+        {count !== 0 ? (
           <Buttons
-            count={this.state.count}
+            count={count}
             increment={this.increment}
             decrement={this.decrement}
-            amount={this.state.amount}
+            amount={amount}
+            removeProduct={this.removeProduct}
           />
         ) : (
           <AddButton selectedProduct={this.selectedProduct} />

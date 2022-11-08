@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  border: 2px black solid;
+  &__inactive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 200px;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    div {
+      margin: 5px;
+    }
+    button {
+      border-radius: 20px;
+      border: 0;
+      margin: 10px;
+      background-color: black;
+      color: white;
+      height: 25px;
+    }
+  }
+  &__active {
+    background-color: chartreuse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    height: 200px;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+    div {
+      margin: 5px;
+    }
+    button {
+      border-radius: 20px;
+      border: 0;
+      margin: 10px;
+      background-color: black;
+      color: white;
+      height: 25px;
+    }
+  }
+}
+
+
+
+

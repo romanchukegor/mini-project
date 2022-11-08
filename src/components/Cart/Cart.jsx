@@ -1,16 +1,16 @@
 import React from "react";
-import Header from "../Header/Header";
-import Card from "../Card/Card";
-import list from "../db/db";
+import Header from "components/Header/Header";
+import Card from "components/Card/Card";
+import list from "components/db/db";
 import "./Cart.scss";
 
 class Cart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      list: list,
       total: 0,
       textInput: "",
-      
     };
   }
 
@@ -33,24 +33,26 @@ class Cart extends React.Component {
           total={this.state.total}
           textInput={this.textInput}
           handleChange={this.handleChange}
-          searchFilter = {this.searchFilter}
+          searchFilter={this.searchFilter}
         />
-        <div className="products">
-          {list.filter((card) => {
-            return card.name
-              .toLowerCase()
-              .includes(this.state.textInput.toLowerCase());
-          }).map((item) => {
-            return (
-              <Card
-                item={item}
-                key={item.id}
-                totalSumInc={this.totalSumInc}
-                totalSumDec={this.totalSumDec}
-                count={this.state.count}
-              />
-            );
-          })}
+        <div className="container__products">
+          {this.state.list
+            .filter((card) => {
+              return card.name
+                .toLowerCase()
+                .includes(this.state.textInput.toLowerCase());
+            })
+            .map((item) => {
+              return (
+                <Card
+                  item={item}
+                  key={item.id}
+                  totalSumInc={this.totalSumInc}
+                  totalSumDec={this.totalSumDec}
+                  count={this.state.count}
+                />
+              );
+            })}
         </div>
       </div>
     );
