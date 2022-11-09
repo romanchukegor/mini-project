@@ -1,0 +1,28 @@
+.header {
+  display: flex;
+
+  &__image {
+    width: 100px;
+    height: 60px;
+  }
+  &__input-block {
+    margin: 15px 35px 0 35px;
+  }
+  &__text {
+    font-weight: bold;
+  }
+  &__input-block {
+    &__input {
+      height: 30px;
+      margin-right: 20px;
+      background-color: gainsboro;
+      border: 0px;
+      &__button {
+        height: 30px;
+        font-weight: bold;
+        background-color: gainsboro;
+        border: 0px;
+      }
+    }
+  }
+}

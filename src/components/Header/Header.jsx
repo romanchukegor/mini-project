@@ -1,5 +1,5 @@
 import React from "react";
-import "./Header.scss";
+import "./style.scss";
 
 class Header extends React.Component {
   constructor(props) {
@@ -21,11 +21,19 @@ class Header extends React.Component {
             type="text"
             placeholder="Название товара"
             onChange={handleChange}
+            className="header__input-block__input"
           />
-          <button onClick={searchFilter}>ПОИСК</button>
+          <button
+            onClick={searchFilter}
+            className="header__input-block__button"
+          >
+            ПОИСК
+          </button>
         </div>
-        <div className="header__text">
-          <p>Общая стоимость выбранных товаров: {total} р.</p>
+        <div>
+          <p className="header__text">
+            Общая стоимость выбранных товаров: {total} р.
+          </p>
         </div>
       </div>
     );

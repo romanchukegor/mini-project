@@ -2,7 +2,7 @@ import React from "react";
 import Header from "components/Header/Header";
 import Card from "components/Card/Card";
 import list from "components/db/db";
-import "./Cart.scss";
+import "./style.scss";
 
 class Cart extends React.Component {
   constructor(props) {

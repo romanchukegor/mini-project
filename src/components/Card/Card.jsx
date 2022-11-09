@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Buttons from "components/Buttons/Buttons";
 import AddButton from "components/AddButton/AddButton";
-import "./Card.scss";
+import "./style.scss";
 
 class Card extends Component {
   constructor(props) {
@@ -64,10 +64,23 @@ class Card extends Component {
               : "card__active"
           }
         >
-          <img src={img} alt="" />
-          <div style={{ fontWeight: "bold" }}>{name}</div>
-          <div>Цена: {price}</div>
-          <div>Всего: {amount}</div>
+          <img
+            src={img}
+            alt=""
+            className="card__inactive__img card__active__img"
+          />
+          <div
+            style={{ fontWeight: "bold" }}
+            className="card__inactive__info card__active__img"
+          >
+            {name}
+          </div>
+          <div className="card__inactive__info card__active__img">
+            Цена: {price}
+          </div>
+          <div className="card__inactive__info card__active__img">
+            Всего: {amount}
+          </div>
         </div>
         {count !== 0 ? (
           <Buttons

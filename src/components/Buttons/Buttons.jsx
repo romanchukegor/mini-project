@@ -27,15 +27,25 @@ class Buttons extends Component {
     const { decrement, increment, removeProduct } = this.props;
     const { disableInc, disableDec } = this.state;
     return (
-      <div className="card__count">
-        <button onClick={decrement} disabled={disableDec}>
+      <div className="counter">
+        <button
+          onClick={decrement}
+          disabled={disableDec}
+          className="counter__button"
+        >
           -
         </button>
         <p>{this.props.count}</p>
-        <button onClick={increment} disabled={disableInc}>
+        <button
+          onClick={increment}
+          disabled={disableInc}
+          className="counter__button"
+        >
           +
         </button>
-        <button onClick={removeProduct}>Удалить</button>
+        <button onClick={removeProduct} className="counter__delete-button">
+          Удалить
+        </button>
       </div>
     );
   }

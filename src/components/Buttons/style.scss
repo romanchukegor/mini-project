@@ -1,7 +1,18 @@
-.card__count {
-    display: flex;
-    justify-content: center;
-    background-color: white;
-    width: 100%;
-    background-color:lightblue;
+.counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  width: 100%;
+  background-color: lightblue;
+  &__button {
+    height: 30px;
+    width: 30px;
   }
+  &__delete-button {
+    height: 30px;
+    width: 100px;
+    margin-left: 10px;
+  }
+}
