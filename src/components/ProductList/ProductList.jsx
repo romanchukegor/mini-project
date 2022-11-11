@@ -24,7 +24,6 @@ class ProductList extends React.Component {
   };
 
   totalSumIncrement = (price) => {
-    debugger;
     this.setState((prevState) => ({ total: prevState.total + price }));
   };
 
