@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Buttons from "components/Buttons/Buttons";
-import AddButton from "components/AddButton/AddButton";
 import "./style.scss";
 
 class Card extends Component {
@@ -20,37 +19,24 @@ class Card extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.count > prevState.count) {
-      this.setState({ amount: this.state.amount - 1 });
+      this.props.totalSumIncrement(this.state.price);
     } else if (this.state.count < prevState.count) {
-      this.setState({ amount: this.state.amount + 1 });
-    }
-    if (this.state.count > prevState.count) {
-      this.props.totalSumInc(this.state.price, this.state.count);
-    } else if (this.state.count < prevState.count) {
-      this.props.totalSumDec(this.state.price, this.state.count);
+      this.props.totalSumDecrement(this.state.price);
     }
   }
 
-  selectedProduct = () => {
-    if (this.state.count === 0) {
-      this.setState({ selectedProduct: true, count: 1 });
-    }
-  };
-
-  removeProduct = () => {
+  increment = () => {
     this.setState({
-      selectedProduct: false,
-      count: 0,
-      amount: this.props.item.amount,
+      count: this.state.count + 1,
+      amount: this.state.amount - 1,
     });
   };
 
-  increment = () => {
-    this.setState({ count: this.state.count + 1 });
-  };
-
   decrement = () => {
-    this.setState({ count: this.state.count - 1 });
+    this.setState({
+      count: this.state.count - 1,
+      amount: this.state.amount + 1,
+    });
   };
 
   render() {
@@ -58,41 +44,28 @@ class Card extends Component {
     return (
       <div className="card">
         <div
-          className={
-            this.state.selectedProduct === false
-              ? "card__inactive"
-              : "card__active"
-          }
+          className={this.state.count === 0 ? "card__inactive" : "card__active"}
         >
           <img
             src={img}
             alt=""
             className="card__inactive__img card__active__img"
           />
-          <div
-            style={{ fontWeight: "bold" }}
-            className="card__inactive__info card__active__img"
-          >
-            {name}
-          </div>
-          <div className="card__inactive__info card__active__img">
+          <div className="card__inactive__info card__active__info">{name}</div>
+          <div className="card__inactive__info card__active__info">
             Цена: {price}
           </div>
-          <div className="card__inactive__info card__active__img">
+          <div className="card__inactive__info card__active__info">
             Всего: {amount}
           </div>
         </div>
-        {count !== 0 ? (
-          <Buttons
-            count={count}
-            increment={this.increment}
-            decrement={this.decrement}
-            amount={amount}
-            removeProduct={this.removeProduct}
-          />
-        ) : (
-          <AddButton selectedProduct={this.selectedProduct} />
-        )}
+        <Buttons
+          count={count}
+          increment={this.increment}
+          decrement={this.decrement}
+          amount={amount}
+          removeProduct={this.removeProduct}
+        />
       </div>
     );
   }

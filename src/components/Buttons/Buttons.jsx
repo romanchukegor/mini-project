@@ -6,31 +6,38 @@ class Buttons extends Component {
     super(props);
 
     this.state = {
-      disableInc: false,
-      disableDec: false,
+      disableIncrementButton: false,
+      disableDecrementButton: true,
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.amount !== prevProps.amount) {
-      if (this.props.count === 1) {
-        this.setState({ disableDec: !this.state.disableDec });
+    if (this.props.count !== prevProps.count) {
+      if (this.props.count === 0) {
+        this.setState({
+          disableDecrementButton: !this.state.disableDecrementButton,
+        });
       } else if (this.props.amount === 0) {
-        this.setState({ disableInc: !this.state.disableInc });
+        this.setState({
+          disableIncrementButton: !this.state.disableIncrementButton,
+        });
       } else {
-        this.setState({ disableInc: false, disableDec: false });
+        this.setState({
+          disableIncrementButton: false,
+          disableDecrementButton: false,
+        });
       }
     }
   }
 
   render() {
-    const { decrement, increment, removeProduct } = this.props;
-    const { disableInc, disableDec } = this.state;
+    const { decrement, increment } = this.props;
+    const { disableIncrementButton, disableDecrementButton } = this.state;
     return (
       <div className="counter">
         <button
           onClick={decrement}
-          disabled={disableDec}
+          disabled={disableDecrementButton}
           className="counter__button"
         >
           -
@@ -38,13 +45,10 @@ class Buttons extends Component {
         <p>{this.props.count}</p>
         <button
           onClick={increment}
-          disabled={disableInc}
+          disabled={disableIncrementButton}
           className="counter__button"
         >
           +
-        </button>
-        <button onClick={removeProduct} className="counter__delete-button">
-          Удалить
         </button>
       </div>
     );

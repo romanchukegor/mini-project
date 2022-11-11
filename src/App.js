@@ -1,13 +1,9 @@
 import React from "react";
-import Cart from "./components/Cart/Cart";
+import ProductList from "./components/ProductList/ProductList";
 
 class App extends React.Component {
   render() {
-    return (
-      <div>
-        <Cart />
-      </div>
-    );
+    return <ProductList />;
   }
 }
 
