@@ -1,25 +1,36 @@
 import React from "react";
-import Icon from "images/dns.png";
+import icon from "images/dns.png";
 import "./style.scss";
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      textInput: "",
+    };
+  }
+
+  handleChange = (event) => {
+    this.setState({ textInput: event.target.value });
+  };
 
   render() {
-    const { handleChange, searchFilter, total } = this.props;
+    const { total, searchFilter } = this.props;
     return (
       <div className="header">
         <div>
-          <img src={Icon} className="header__image" alt="" />
+          <img src={icon} className="header__image" alt="" />
         </div>
         <div className="header__input-block">
           <input
             type="text"
             placeholder="Название товара"
-            onChange={handleChange}
+            onChange={this.handleChange}
             className="header__input-block__input"
           />
           <button
-            onClick={searchFilter}
+            onClick={() => searchFilter(this.state.textInput)}
             className="header__input-block__button"
           >
             ПОИСК

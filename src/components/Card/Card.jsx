@@ -1,17 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import Buttons from "components/Buttons/Buttons";
 import "./style.scss";
 
-class Card extends Component {
+class Card extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      id: this.props.item.id,
       price: this.props.item.price,
       amount: this.props.item.amount,
-      name: this.props.item.name,
-      img: this.props.item.img,
       count: 0,
       selectedProduct: false,
     };
@@ -20,7 +17,8 @@ class Card extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.count > prevState.count) {
       this.props.totalSumIncrement(this.state.price);
-    } else if (this.state.count < prevState.count) {
+    }
+    if (this.state.count < prevState.count) {
       this.props.totalSumDecrement(this.state.price);
     }
   }
@@ -40,18 +38,20 @@ class Card extends Component {
   };
 
   render() {
-    const { price, amount, name, img, count } = this.state;
+    const { price, amount, count } = this.state;
     return (
       <div className="card">
         <div
           className={this.state.count === 0 ? "card__inactive" : "card__active"}
         >
           <img
-            src={img}
+            src={this.props.item.img}
             alt=""
             className="card__inactive__img card__active__img"
           />
-          <div className="card__inactive__info card__active__info">{name}</div>
+          <div className="card__inactive__info card__active__info">
+            {this.props.item.name}
+          </div>
           <div className="card__inactive__info card__active__info">
             Цена: {price}
           </div>
@@ -64,7 +64,6 @@ class Card extends Component {
           increment={this.increment}
           decrement={this.decrement}
           amount={amount}
-          removeProduct={this.removeProduct}
         />
       </div>
     );

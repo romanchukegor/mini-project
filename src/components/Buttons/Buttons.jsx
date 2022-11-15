@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.scss";
 
-class Buttons extends Component {
+class Buttons extends React.Component {
   constructor(props) {
     super(props);
 

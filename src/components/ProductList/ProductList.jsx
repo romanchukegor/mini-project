@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "components/Header/Header";
 import Card from "components/Card/Card";
-import list from "db/db";
+import list from "constants";
 import "./style.scss";
 
 class ProductList extends React.Component {
@@ -10,18 +10,15 @@ class ProductList extends React.Component {
     this.state = {
       list: list,
       total: 0,
-      textInput: "",
-      filtered: [],
+      searchedList: [],
     };
   }
 
   componentDidMount() {
-    this.setState({ filtered: [...this.state.filtered, ...this.state.list] });
+    this.setState({
+      searchedList: [...this.state.searchedList, ...this.state.list],
+    });
   }
-
-  handleChange = (event) => {
-    this.setState({ textInput: event.target.value });
-  };
 
   totalSumIncrement = (price) => {
     this.setState((prevState) => ({ total: prevState.total + price }));
@@ -31,13 +28,11 @@ class ProductList extends React.Component {
     this.setState((prevState) => ({ total: prevState.total - price }));
   };
 
-  searchFilter = () => {
+  searchFilter = (textInput) => {
     const cards = this.state.list.filter((card) => {
-      return card.name
-        .toLowerCase()
-        .includes(this.state.textInput.toLowerCase());
+      return card.name.toLowerCase().includes(textInput.toLowerCase());
     });
-    this.setState({ filtered: cards, isError: false });
+    this.setState({ searchedList: cards, isError: false });
   };
 
   render() {
@@ -46,11 +41,10 @@ class ProductList extends React.Component {
         <Header
           total={this.state.total}
           textInput={this.textInput}
-          handleChange={this.handleChange}
           searchFilter={this.searchFilter}
         />
         <div className="container__products">
-          {this.state.filtered.map((item) => {
+          {this.state.searchedList.map((item) => {
             return (
               <Card
                 item={item}
