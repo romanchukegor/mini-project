@@ -44,8 +44,7 @@ class ProductList extends React.Component {
           searchFilter={this.searchFilter}
         />
         <div className="container__products">
-          {this.state.searchedList.map((item) => {
-            return (
+          {this.state.searchedList.map((item) => (    
               <Card
                 item={item}
                 key={item.id}
@@ -53,8 +52,7 @@ class ProductList extends React.Component {
                 totalSumDecrement={this.totalSumDecrement}
                 count={this.state.count}
               />
-            );
-          })}
+          ))}
         </div>
       </div>
     );
